@@ -7,22 +7,37 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
+
+import android.graphics.Bitmap;
 import android.os.Bundle;
+
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
+import com.bumptech.glide.Glide;
+
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.data.ItemsContract;
@@ -51,7 +66,7 @@ public class ArticleListActivity extends AppCompatActivity implements
     // Use default locale format
     private SimpleDateFormat outputFormat = new SimpleDateFormat();
     // Most time functions can only handle 1902 - 2037
-    private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2,1,1);
+    private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2, 1, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +181,7 @@ public class ArticleListActivity extends AppCompatActivity implements
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(final ViewHolder holder, int position) {
             mCursor.moveToPosition(position);
             holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
             Date publishedDate = parsePublishedDate();
@@ -182,13 +197,45 @@ public class ArticleListActivity extends AppCompatActivity implements
             } else {
                 holder.subtitleView.setText(Html.fromHtml(
                         outputFormat.format(publishedDate)
-                        + "<br/>" + " by "
-                        + mCursor.getString(ArticleLoader.Query.AUTHOR)));
+                                + "<br/>" + " by "
+                                + mCursor.getString(ArticleLoader.Query.AUTHOR)));
             }
-            holder.thumbnailView.setImageUrl(
+          /*  holder.thumbnailView.setImageUrl(
                     mCursor.getString(ArticleLoader.Query.THUMB_URL),
                     ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
             holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
+*/
+
+
+            Glide.with(getApplicationContext())
+                    .asBitmap()
+                    .load(mCursor.getString(ArticleLoader.Query.THUMB_URL))
+                    .listener(new RequestListener<Bitmap>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+
+                            Palette.from(resource).generate(new Palette.PaletteAsyncListener() {
+                                @Override
+                                public void onGenerated(@NonNull Palette palette) {
+                                    if (palette.getDominantSwatch() != null) {
+                                        holder.linearLayout.setBackgroundColor(palette.getDominantSwatch().getRgb());
+                                        holder.titleView.setTextColor(palette.getDominantSwatch().getBodyTextColor());
+                                        holder.subtitleView.setTextColor(palette.getDominantSwatch().getBodyTextColor());
+                                    }
+                                }
+                            });
+
+                            return false;
+                        }
+                    })
+                    .into(holder.thumbnailView);
+
+
         }
 
         @Override
@@ -198,15 +245,17 @@ public class ArticleListActivity extends AppCompatActivity implements
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public DynamicHeightNetworkImageView thumbnailView;
+        public ImageView thumbnailView;
         public TextView titleView;
         public TextView subtitleView;
+        public LinearLayout linearLayout;
 
         public ViewHolder(View view) {
             super(view);
-            thumbnailView = (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
+            thumbnailView = (ImageView) view.findViewById(R.id.thumbnail);
             titleView = (TextView) view.findViewById(R.id.article_title);
             subtitleView = (TextView) view.findViewById(R.id.article_subtitle);
+            linearLayout = (LinearLayout) view.findViewById(R.id.linearArticleList);
         }
     }
 }

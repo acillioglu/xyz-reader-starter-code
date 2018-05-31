@@ -10,7 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+// import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
@@ -91,8 +91,10 @@ public class ArticleDetailActivity extends AppCompatActivity
             mUpButtonContainer.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
                 @Override
                 public WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-                    view.onApplyWindowInsets(windowInsets);
-                    mTopInset = windowInsets.getSystemWindowInsetTop();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+                        view.onApplyWindowInsets(windowInsets);
+                        mTopInset = windowInsets.getSystemWindowInsetTop();
+                    }
                     mUpButtonContainer.setTranslationY(mTopInset);
                     updateUpButtonPosition();
                     return windowInsets;
