@@ -136,7 +136,7 @@ public class ArticleListActivity extends AppCompatActivity implements
         mRecyclerView.setAdapter(adapter);
         int columnCount = getResources().getInteger(R.integer.list_column_count);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, columnCount));
-        ItemOffsetDecoration ıtemOffsetDecoration = new ItemOffsetDecoration(this, R.dimen.deneme);
+        ItemOffsetDecoration ıtemOffsetDecoration = new ItemOffsetDecoration(this, R.dimen.recycler_padding);
         mRecyclerView.addItemDecoration(ıtemOffsetDecoration);
     }
 

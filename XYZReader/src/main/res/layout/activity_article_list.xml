@@ -7,7 +7,7 @@
         android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:elevation="8dp"
+        android:elevation="@dimen/appbar_elevation"
         android:theme="@style/AppTheme">
 
         <android.support.v7.widget.Toolbar
@@ -39,8 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:scrollbarStyle="outsideOverlay"
-            android:padding="@dimen/deneme"/>
+            android:padding="@dimen/recycler_padding"
+            android:scrollbarStyle="outsideOverlay" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
