@@ -26,7 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                android:contentDescription="@string/descrtiption_detailphoto"/>
 
 
             <android.support.v7.widget.Toolbar
@@ -87,9 +88,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
-                    android:lineSpacingMultiplier="0.9"
+                    android:lineSpacingMultiplier="@fraction/detail_title_spacing_multiplier"
                     android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/text_sz_head"
                     android:textStyle="bold" />
 
                 <TextView
@@ -97,7 +98,7 @@
                     style="?android:attr/textAppearanceSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/ltgray" />
+                    android:textColor="@color/light_gray" />
             </LinearLayout>
 
             <TextView
@@ -111,9 +112,9 @@
                 android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
                 android:paddingBottom="@dimen/detail_body_bottom_margin"
                 android:paddingTop="@dimen/detail_body_top_margin"
-                android:textColor="#333333"
+                android:textColor="@color/gray_text"
                 android:textColorLink="@color/theme_accent"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_sz_body"
 
                 />
 

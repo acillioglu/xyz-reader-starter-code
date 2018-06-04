@@ -3,6 +3,7 @@
     <dimen name="detail_title_text_size">32sp</dimen>
     <dimen name="detail_body_text_size">22sp</dimen>
     <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
+    <item name="detail_title_spacing_multiplier" format="float" type="fraction">0.9</item>
 
     <dimen name="fab_elevation">6dp</dimen>
     <dimen name="fab_press_translation_z">6dp</dimen>
@@ -12,5 +13,36 @@
     <dimen name="appbar_height">250dp</dimen>
 
     <dimen name="recycler_padding">1dp</dimen>
+
+    <!-- list item -->
+
+    <dimen name="card_corner">4dp</dimen>
+    <dimen name="image_hight">150dp</dimen>
+
+
+    <!-- general -->
+
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_medium">8dp</dimen>
+    <dimen name="margin_large">12dp</dimen>
+    <dimen name="margin_extra_large">16dp</dimen>
+
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_large">12dp</dimen>
+    <dimen name="padding_extra_large">16dp</dimen>
+
+
+    <dimen name="text_sz_body">16sp</dimen>
+    <dimen name="text_sz_head">20sp</dimen>
+
+
+    <dimen name="textview_maxline_small">2</dimen>
+    <dimen name="textview_maxline_medium">4</dimen>
+
+
+
+
+
 
 </resources>
