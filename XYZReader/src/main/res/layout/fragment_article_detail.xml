@@ -25,9 +25,9 @@
                 android:id="@+id/photo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/descrtiption_detailphoto"
                 android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"
-                android:contentDescription="@string/descrtiption_detailphoto"/>
+                app:layout_collapseMode="parallax" />
 
 
             <android.support.v7.widget.Toolbar
@@ -59,11 +59,11 @@
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
         <LinearLayout
+            android:id="@+id/linear_top"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
@@ -116,9 +116,11 @@
                 android:textColorLink="@color/theme_accent"
                 android:textSize="@dimen/text_sz_body"
 
+
                 />
 
         </LinearLayout>
+
 
     </android.support.v4.widget.NestedScrollView>
 
@@ -129,11 +131,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:background="?attr/selectableItemBackgroundBorderless"
-        app:backgroundTint="@color/theme_accent"
         android:clickable="true"
         android:elevation="@dimen/fab_elevation"
         android:focusable="true"
         android:src="@drawable/ic_share"
+        app:backgroundTint="@color/theme_accent"
         app:layout_anchor="@id/appbar_detail"
         app:layout_anchorGravity="bottom|right|end" />
 

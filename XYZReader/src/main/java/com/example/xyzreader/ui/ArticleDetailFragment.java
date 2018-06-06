@@ -62,6 +62,8 @@ public class ArticleDetailFragment extends Fragment implements
 
     private View mUpButton;
 
+
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -101,6 +103,7 @@ public class ArticleDetailFragment extends Fragment implements
         // fragments because their mIndex is -1 (haven't been added to the activity yet). Thus,
         // we do this in onActivityCreated.
         getLoaderManager().initLoader(0, null, this);
+
     }
 
     @Override
@@ -132,6 +135,7 @@ public class ArticleDetailFragment extends Fragment implements
         });
 
         bindViews();
+
         return mRootView;
     }
 
@@ -280,4 +284,5 @@ public class ArticleDetailFragment extends Fragment implements
         mCursor = null;
         bindViews();
     }
+
 }
